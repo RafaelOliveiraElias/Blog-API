@@ -12,7 +12,13 @@ const loginController = {
 
   validateToken: (req, res, next) => {
     const { authorization } = req.headers;
-   
+    
+    if (!authorization) {
+      const e = new Error('Token not found');
+      e.name = 'UnauthorizedError';
+      throw e;
+    }
+    
     jwtService.validateToken(authorization);
 
     next();

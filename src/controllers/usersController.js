@@ -11,7 +11,7 @@ const usersController = {
 
     const user = await usersService.create({ email, password, displayName, image });
 
-    res.status(201).json({token: user});
+    res.status(201).json({ token: user });
   },
 
   findById: async (req, res) => {
