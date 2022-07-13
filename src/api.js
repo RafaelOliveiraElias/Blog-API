@@ -13,10 +13,12 @@ app.use(express.json());
 const loginRouter = require('./routers/loginRouter');
 const usersRouter = require('./routers/usersRoute');
 const categoryRouter = require('./routers/categoryRouter');
+const postRouter = require('./routers/postRouter');
 
 app.use('/user', usersRouter);
 app.use('/login', loginRouter);
 app.use('/categories', categoryRouter);
+app.use('/post', postRouter);
 
 app.use(errorMidwares);
 
