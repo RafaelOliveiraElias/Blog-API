@@ -15,7 +15,7 @@ const usersController = {
   },
 
   findById: async (req, res) => {
-    const user = await usersService.findByIdLazy(req.params.id);
+    const user = await usersService.findByIdEager(req.params.id);
 
     res.status(200).json(user);
   },

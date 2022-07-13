@@ -19,7 +19,7 @@ const usersService = {
       where: { email }, 
     }); if (user) {
       const e = new Error('User already registered');
-      e.name = 'NotFoundError';
+      e.name = 'ConflictError';
       throw e;
     }
     return value;
@@ -38,6 +38,19 @@ const usersService = {
     const token = jwtService.createToken({ id, email });
 
     return token;
+  },
+
+  findByIdEager: async (id) => {
+    const user = await db.User.findByPk(id, {
+      attributes: { exclude: ['password'] },
+    });
+
+    if (!user) {
+      const e = new Error('User does not exist');
+      e.name = 'NotFoundError';
+      throw e;
+    }
+    return user;
   },
 
 };
