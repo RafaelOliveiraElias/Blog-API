@@ -11,15 +11,13 @@ app.use(express.json());
 
 const loginRouter = require('./routers/loginRouter');
 
-
-
 app.use('/login', loginRouter);
 
 app.use((err, _req, res, _next) => {
   const { name, message } = err;
   switch (name) {
     case 'ValidationError':
-      res.status(400).json({ message: "Some required fields are missing" });
+      res.status(400).json({ message: 'Some required fields are missing' });
       break;
     case 'NotFoundError':
       res.status(400).json({ message });

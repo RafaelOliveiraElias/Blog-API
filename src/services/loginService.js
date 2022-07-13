@@ -2,7 +2,6 @@ const Joi = require('joi');
 const db = require('../database/models');
 const jwtService = require('./jwtService');
 
-
 const loginService = {
   validateBody: (data) => {
     const schema = Joi.object({
