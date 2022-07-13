@@ -24,7 +24,7 @@ const loginService = {
 
     if (!user || user.password !== password) {
       const e = new Error('Invalid fields');
-      e.name = 'NotFoundError';
+      e.name = 'ValidationError';
       throw e;
     }
 
