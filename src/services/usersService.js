@@ -19,14 +19,14 @@ const usersService = {
       where: { email }, 
     }); if (user) {
       const e = new Error('User already registered');
-      e.name = 'UnauthorizedError';
+      e.name = 'NotFoundError';
       throw e;
     }
     return value;
   },
 
   list: async () => {
-    const users = await User.findAll();
+    const users = await User.findAll({attributes: { exclude: ['password'] },});
     return users;
   },
 
