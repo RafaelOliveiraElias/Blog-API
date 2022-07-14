@@ -52,7 +52,10 @@ const usersService = {
     }
     return user;
   },
-
+  
+  remove: async (id) => {
+    User.destroy({ where: { id } });
+  },
 };
 
 module.exports = usersService;

@@ -1,3 +1,4 @@
+const { validateToken } = require('../services/jwtService');
 const usersService = require('../services/usersService');
 
 const usersController = {
@@ -19,6 +20,15 @@ const usersController = {
 
     res.status(200).json(user);
   },
+
+  remove: async (req, res) => {
+    const { authorization } = req.headers;
+    const userId = validateToken(authorization).data.id;
+  
+    await usersService.remove(userId);
+  
+    return res.status(204).end();
+  },  
 };
 
 module.exports = usersController;
