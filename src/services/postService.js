@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const { Op } = require('sequelize');
 const { BlogPost, PostCategory, Category, User } = require('../database/models');
 const config = require('../database/config/config');
 
@@ -85,6 +86,21 @@ const categoryService = {
       throw e;
     }
     await BlogPost.destroy({ where: { id } });
+  },
+
+  listByQuery: async (query) => {
+    const posts = await BlogPost.findAll({
+      where: {
+        // referencia: https://sequelize.org/docs/v6/core-concepts/model-querying-finders/#findandcountall
+        [Op.or]: [
+          { title: { [Op.like]: `%${query}%` } },
+          { content: { [Op.like]: `%${query}%` } },
+        ],
+      },
+      include: [{ model: User, as: 'user', attributes: { exclude: 'password' } },
+      { model: Category, as: 'categories', through: { attributes: [] } }],
+    });
+    return posts;
   },
 };
 

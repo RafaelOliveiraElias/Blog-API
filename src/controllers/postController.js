@@ -41,6 +41,12 @@ const postController = {
     await postService.remove(userId, id);
     return res.status(204).end();
   },
+
+  listByQuery: async (req, res) => {
+    const { q } = req.query;
+    const posts = await postService.listByQuery(q);
+    res.status(200).json(posts);
+  },
 };
 
 module.exports = postController;
