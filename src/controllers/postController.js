@@ -12,9 +12,19 @@ const postController = {
     const { authorization } = req.headers;
 
     const userId = validateToken(authorization).data.id;
-    const user = await postService.create({ userId, title, content, categoryIds });
+    const post = await postService.create({ userId, title, content, categoryIds });
 
-    res.status(201).json(user);
+    res.status(201).json(post);
+  },
+
+  edit: async (req, res) => {
+    const { title, content } = await postService.validateBodyEdit(req.body);
+    const { authorization } = req.headers;
+    const { id } = req.params;
+    const userId = validateToken(authorization).data.id;
+    const post = await postService.edit(userId, id, title, content);
+
+    res.status(200).json(post);
   },
 
   findById: async (req, res) => {

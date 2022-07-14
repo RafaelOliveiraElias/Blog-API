@@ -23,6 +23,16 @@ const categoryService = {
     return data;
   },
 
+  validateBodyEdit: async (data) => {
+    const { content, title } = data;
+    if (!content || !title) {
+      const e = new Error('Some required fields are missing');
+        e.name = 'ValidationError';
+      throw e;
+    }
+    return data;
+  },
+
   list: async () => {
     const posts = await BlogPost.findAll({ 
       include: [{ model: User, as: 'user', attributes: { exclude: 'password' } },
@@ -52,6 +62,18 @@ const categoryService = {
       e.name = 'NotFoundError';
       throw e;
     }
+    return post;
+  },
+
+  edit: async (userId, id, title, content) => {
+    const { user } = await categoryService.findByIdEager(id);
+    if (user.id !== userId) {
+      const e = new Error('Unauthorized user');
+        e.name = 'UnauthorizedError';
+      throw e;
+    }
+    await BlogPost.update({ title, content }, { where: { id } });
+    const post = await categoryService.findByIdEager(id);
     return post;
   },
 };
