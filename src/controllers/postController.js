@@ -18,9 +18,9 @@ const postController = {
   },
 
   findById: async (req, res) => {
-    const user = await postService.findByIdEager(req.params.id);
+    const post = await postService.findByIdEager(req.params.id);
 
-    res.status(200).json(user);
+    res.status(200).json(post);
   },
 };
 
