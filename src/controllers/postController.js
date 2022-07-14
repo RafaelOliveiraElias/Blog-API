@@ -3,8 +3,8 @@ const postService = require('../services/postService');
 
 const postController = {
   list: async (req, res) => {
-    const users = await postService.list();
-    res.status(200).json(users);
+    const posts = await postService.list();
+    res.status(200).json(posts);
   },
 
   create: async (req, res) => {

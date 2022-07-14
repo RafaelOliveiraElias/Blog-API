@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { BlogPost, PostCategory, Category } = require('../database/models');
+const { BlogPost, PostCategory, Category, User } = require('../database/models');
 const config = require('../database/config/config');
 
 // referencia create:https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#creating-in-bulk
@@ -24,8 +24,11 @@ const categoryService = {
   },
 
   list: async () => {
-    const categories = await Category.findAll();
-    return categories;
+    const posts = await BlogPost.findAll({ 
+      include: [{ model: User, as: 'user', attributes: { exclude: 'password' } },
+      { model: Category, as: 'categories', through: { attributes: [] } }],
+    });
+    return posts;
   },
 
   create: async (data) => {
