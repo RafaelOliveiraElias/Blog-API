@@ -76,6 +76,16 @@ const categoryService = {
     const post = await categoryService.findByIdEager(id);
     return post;
   },
+
+  remove: async (userId, id) => {
+    const { user } = await categoryService.findByIdEager(id);
+    if (user.id !== userId) {
+      const e = new Error('Unauthorized user');
+        e.name = 'UnauthorizedError';
+      throw e;
+    }
+    await BlogPost.destroy({ where: { id } });
+  },
 };
 
 module.exports = categoryService;
