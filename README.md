@@ -1,16 +1,22 @@
-# 🚧 README em construção 🚧
+## Blogs API
 
-<!-- Olá, Tryber!
+It was developed with _Node.js_ a RESTful API using the __Sequelize__ package to make a _CRUD_ (Create, Read, Update, Delete) of posts and users of a general Blog. It was used the _MSC_ architecture the _MySQL_ as database.
 
-Esse é apenas um arquivo inicial para o README do seu projeto.
+### How to run the project
 
-É essencial que você preencha esse documento por conta própria, ok?
+```bash
 
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
+    # Clone the repository (using ssh)
+    $ git clone git@github.com:RafaelOliveiraElias/Blog-API.git
 
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
+    # Go into the project's directory
+    $ cd Blog-API
 
--->
+    # Install the dependencies
+    $ npm install
+
+    # .Env configuration: Rename the ".env.example" file to ".env" to set the default servers configurations
+
+    # Start the project
+    $ npm start
+```
